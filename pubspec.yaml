@@ -1,0 +1,29 @@
+name: contacts
+description: Contacts app.
+
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  get: 3.26.0
+  google_fonts: 1.1.2
+  contacts_service: 0.4.6
+  permission_handler: 5.1.0+2
+  hive: 1.4.4+1
+  hive_flutter: 0.3.1
+  path_provider: 1.6.28
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
