@@ -47,7 +47,7 @@ class AppController extends GetxController {
           await Permission.contacts.request();
           var status = await Permission.contacts.status;
           hasContactPermission(status.isGranted);
-        } else {
+        } else if (status.isPermanentlyDenied) {
           showSnack("Please grant permission to read contacts from seetings.");
         }
       }
