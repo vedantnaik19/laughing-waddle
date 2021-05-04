@@ -45,7 +45,8 @@ class AppController extends GetxController {
         hasContactPermission(true);
       } else {
         await Permission.contacts.request();
-        hasContactPermission(await Permission.contacts.status.isGranted);
+        var status = await Permission.contacts.status;
+        hasContactPermission(status.isGranted);
       }
     } catch (e) {
       handleError(e);
