@@ -40,13 +40,16 @@ class AppController extends GetxController {
 
   Future<void> _checkPermission() async {
     try {
-      PermissionStatus status = await Permission.contacts.status;
-      if (status.isGranted) {
-        hasContactPermission(true);
-      } else {
-        await Permission.contacts.request();
-        var status = await Permission.contacts.status;
+      if (!hasContactPermission.value) {
+        PermissionStatus status = await Permission.contacts.status;
         hasContactPermission(status.isGranted);
+        if (!status.isGranted && !status.isPermanentlyDenied) {
+          await Permission.contacts.request();
+          var status = await Permission.contacts.status;
+          hasContactPermission(status.isGranted);
+        } else {
+          showSnack("Please grant permission to read contacts from seetings.");
+        }
       }
     } catch (e) {
       handleError(e);
