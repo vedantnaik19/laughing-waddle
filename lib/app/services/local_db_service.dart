@@ -24,14 +24,27 @@ class LocalDbService extends GetxService {
   }
 
   Future<List<Contact>> getAllContacts() async {
-    List<Contact> contacts = [];
+    // List<Contact> contacts = [];
+    List<Contact> head = [];
+    List<Contact> mid = [];
+    List<Contact> tail = [];
     for (int i = 0; i < _box.length; i++) {
       var c = await _box.get(i, defaultValue: null);
       if (c != null) {
-        c = Contact.fromMap(c);
-        contacts.add(c);
+        var contact = Contact.fromMap(c);
+        if ((contact.displayName ?? " ")
+            .trim()
+            .startsWith(RegExp(r'[a-zA-Z]'))) {
+          head.add(contact);
+        } else if ((contact.displayName ?? " ")
+            .trim()
+            .startsWith(RegExp(r'[0-9]'))) {
+          mid.add(contact);
+        } else
+          tail.add(contact);
       }
     }
-    return contacts;
+
+    return head + mid + tail;
   }
 }

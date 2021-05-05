@@ -83,6 +83,6 @@ class AppController extends GetxController {
 
   void handleError(e) {
     GetUtils.printFunction("AppController: ", e, "", isError: true);
-    showSnack(e.message ?? e.toString());
+    showSnack(e.toString());
   }
 }
