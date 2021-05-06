@@ -33,14 +33,14 @@ class HomePage extends GetView<HomeController> {
                           leading: CircleAvatar(
                             backgroundColor: Colors.primaries[colorIndex],
                             child: Text(
-                              Helper.getInitials(contact.displayName ?? " "),
+                              Helper.getInitials(contact.name ?? " "),
                               style: textTheme.headline6
                                   .copyWith(color: Colors.white, fontSize: 14),
                             ),
                           ),
-                          title: Text(contact.displayName ?? " "),
+                          title: Text(contact.name ?? " "),
                           subtitle: Text(
-                            Helper.getPhones(contact.phones),
+                            contact.phones,
                           ),
                         );
                       },

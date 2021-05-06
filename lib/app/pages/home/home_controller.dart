@@ -2,17 +2,17 @@
 
 import 'dart:async';
 
+import 'package:contacts/app/data/models/db_contact.dart';
 import 'package:contacts/app/services/local_db_service.dart';
 
 import '../../../app/app_controller.dart';
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController with WidgetsBindingObserver {
   final LocalDbService _localDbService = Get.find();
   final AppController _appController = Get.find();
-  RxList<Contact> contacts = RxList<Contact>.empty();
+  RxList<DbContact> contacts = RxList<DbContact>.empty();
   StreamSubscription _syncSub;
 
   int get contactsCount => contacts.value.length;
@@ -51,7 +51,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
 
   Future<void> _getContacts({bool toSync = true}) async {
     try {
-      List<Contact> list = await _localDbService.getAllContacts();
+      List<DbContact> list = await _localDbService.getAllContacts();
       contacts(list);
       if (toSync) _appController.contactsCheck();
     } catch (e) {
